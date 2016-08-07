@@ -28,7 +28,7 @@ void ATankPlayerController::Tick(float DeltaTime) {
 
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation)) {
-		GetControlledTank()->AimLocation(HitLocation);
+		//GetControlledTank()->AimLocation(HitLocation);
 	}
 }
 
