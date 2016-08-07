@@ -33,10 +33,12 @@ void ATankAIController::Tick(float DeltaTime) {
 
 }
 
+// Get the AI tank pawn
 ATank* ATankAIController::GetAITank() const {
 	return Cast<ATank>(GetPawn());
 }
 
+// Get the player tank in order to aiming
 ATank* ATankAIController::GetPlayerTank() const {
 	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }

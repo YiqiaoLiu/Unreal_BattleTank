@@ -41,6 +41,7 @@ void ATankPlayerController::AimTowardCrosshair() {
 	if (!GetControlledTank()) return;
 }
 
+// Get the player tank aiming location
 bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const {
 
 	// Calculate the Crosshair screen location
