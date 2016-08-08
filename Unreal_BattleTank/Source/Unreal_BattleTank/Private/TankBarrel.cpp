@@ -3,6 +3,7 @@
 #include "Unreal_BattleTank.h"
 #include "TankBarrel.h"
 
+// Elevate the barrel component
 void UTankBarrel::Elevate(float DegreePerSecond) {
 	UE_LOG(LogTemp, Warning, TEXT("The Elevate be called with speed %f"), DegreePerSecond);
 }
