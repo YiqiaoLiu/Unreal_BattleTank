@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Unreal_BattleTank.h"
+#include "TankBarrel.h"
 #include "TankAimingComponent.h"
 
 
@@ -40,29 +41,47 @@ void UTankAimingComponent::AimLocation(FVector HitLocation, float LaunchSpeed) {
 	// If cannot find the barrel, return
 	if (!Barrel) return;
 
+	// Set the projectile launch
 	FVector StartLoc = Barrel->GetSocketLocation(FName("Projectile"));
 	FVector EndLoc = HitLocation;
 	FVector OutLaunchSpeed;
-	if (UGameplayStatics::SuggestProjectileVelocity(
-				this,
-				OutLaunchSpeed,
-				StartLoc,
-				EndLoc,
-				LaunchSpeed,
-				false,
-				0,
-				0,
-				ESuggestProjVelocityTraceOption::DoNotTrace)
-		) 
+
+	bool IsLaunchSetting = UGameplayStatics::SuggestProjectileVelocity(
+									this,
+									OutLaunchSpeed,
+									StartLoc,
+									EndLoc,
+									LaunchSpeed,
+									false,
+									0,
+									0,
+									ESuggestProjVelocityTraceOption::DoNotTrace
+								);
+
+	// If launch success
+	if (IsLaunchSetting) 
 	{
 		FVector AimDirection = OutLaunchSpeed.GetSafeNormal();
-		FString ControlTankName = GetOwner()->GetName();
-		UE_LOG(LogTemp, Warning, TEXT("%s is aiming direction is: %s"), *ControlTankName, *AimDirection.ToString());
+		MovingBarrelTowardAiming(AimDirection);
 	}
 }
 
 // Set the barrel component of each tank
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet) {
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet) {
 	Barrel = BarrelToSet;
+}
+
+// Moving the barrel to the aiming direction
+void UTankAimingComponent::MovingBarrelTowardAiming(FVector AimingDirection) {
+
+	// Get the rotation of the barrel and the target
+	FRotator BarrelCurrentRot = Barrel->GetForwardVector().Rotation();
+	FRotator AimingRot = AimingDirection.Rotation();
+	FRotator DeltaRot = AimingRot - BarrelCurrentRot;
+
+	FString TankName = GetOwner()->GetName();
+	//UE_LOG(LogTemp, Warning, TEXT("Aiming rotation is: %s"), *AimingRot.ToString());
+
+	Barrel->Elevate(5);
 }
 

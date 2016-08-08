@@ -18,7 +18,7 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 private:
 
