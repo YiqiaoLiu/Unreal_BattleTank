@@ -21,6 +21,11 @@ protected:
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
 private:
+
+	// The launch speed of tank projectile
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 10000.0f;
+	
 	// Sets default values for this pawn's properties
 	ATank();
 
@@ -31,8 +36,6 @@ private:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-
-	
+	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;	
 	
 };

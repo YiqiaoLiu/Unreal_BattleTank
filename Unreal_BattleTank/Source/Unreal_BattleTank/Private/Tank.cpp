@@ -37,7 +37,8 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 // Get the aiming location by calling aiming component
 void ATank::AimLocation(FVector HitLocation) {
-	TankAimingComponent->AimLocation(HitLocation);
+	TankAimingComponent->AimLocation(HitLocation, LaunchSpeed);
+	//UE_LOG(LogTemp, Warning, TEXT("The %s tank launch speed is: %f"), *GetName(), LaunchSpeed);
 }
 
 // Get the Barrel mesh component by calling the aiming component
