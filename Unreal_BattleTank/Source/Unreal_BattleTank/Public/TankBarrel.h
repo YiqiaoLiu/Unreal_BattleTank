@@ -16,7 +16,7 @@ class UNREAL_BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 public:
 	
 	// Function elevate the barrel
-	void Elevate(float DegreePerSecond);
+	void Elevate(float RelativeElevateSpeed);
 
 private:
 	// The elevation speed of barrel

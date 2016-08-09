@@ -85,6 +85,6 @@ void UTankAimingComponent::MovingBarrelTowardAiming(FVector AimingDirection) {
 	FString TankName = GetOwner()->GetName();
 	//UE_LOG(LogTemp, Warning, TEXT("Aiming rotation is: %s"), *AimingRot.ToString());
 
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRot.Pitch);
 }
 
