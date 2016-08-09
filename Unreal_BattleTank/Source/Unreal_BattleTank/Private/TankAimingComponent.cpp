@@ -64,6 +64,9 @@ void UTankAimingComponent::AimLocation(FVector HitLocation, float LaunchSpeed) {
 		FVector AimDirection = OutLaunchSpeed.GetSafeNormal();
 		MovingBarrelTowardAiming(AimDirection);
 	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Target Missing"));
+	}
 }
 
 // Set the barrel component of each tank
