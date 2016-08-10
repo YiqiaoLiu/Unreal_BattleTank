@@ -15,6 +15,6 @@ void UTankBarrel::Elevate(float RelativeElevateSpeed) {
 	float FinalElevation = FMath::Clamp<float>(RawTargetElevation, MinElevationDegree, MaxElevationDegree);
 	SetRelativeRotation(FRotator(FinalElevation, 0, 0));
 	
-	UE_LOG(LogTemp, Warning, TEXT("The Elevate is %f"), RelativeRotation.Pitch);
+	//UE_LOG(LogTemp, Warning, TEXT("The Elevate is %f"), RelativeRotation.Pitch);
 }
 

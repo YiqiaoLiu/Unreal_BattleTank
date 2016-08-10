@@ -8,6 +8,7 @@
 
 // Forward declaration
 class UTankBarrel;
+class UTankTurret;
 class UTankAimingComponent;
 
 UCLASS()
@@ -21,8 +22,13 @@ public:
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
+	// Set the barrel static mesh component
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	// Set the turret static mesh component
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
 
 private:
 
@@ -36,7 +42,6 @@ private:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;	
 	
