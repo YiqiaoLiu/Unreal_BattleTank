@@ -56,7 +56,6 @@ void UTankAimingComponent::AimLocation(FVector HitLocation, float LaunchSpeed) {
 	{
 		FVector AimDirection = OutLaunchSpeed.GetSafeNormal();
 		MovingBarrelTowardAiming(AimDirection);
-		MovingTurretTowardAiming(AimDirection);
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Target Missing"));
@@ -83,17 +82,7 @@ void UTankAimingComponent::MovingBarrelTowardAiming(FVector AimingDirection) {
 
 	// Moving the barrel component
 	Barrel->Elevate(DeltaRot.Pitch);
-}
-
-// Moving the turret to the aiming direction
-void UTankAimingComponent::MovingTurretTowardAiming(FVector AimingDirection) {
-
-	// Get the rotation of the barrel and the target
-	FRotator TurretCurrentRot = Turret->GetForwardVector().Rotation();
-	FRotator AimingRot = AimingDirection.Rotation();
-	FRotator DeltaRot = AimingRot - TurretCurrentRot;
-
-	// Moving the turret component
 	Turret->Whirl(DeltaRot.Yaw);
 }
+
 

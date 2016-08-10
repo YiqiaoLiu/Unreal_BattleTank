@@ -7,13 +7,12 @@
 void UTankTurret::Whirl(float RelativeSpeed) {
 
 	// Clamp the relative speed
-	RelativeSpeed = FMath::Clamp(RelativeSpeed, 0.0f, 1.0f);
+	RelativeSpeed = FMath::Clamp(RelativeSpeed, -1.0f, 1.0f);
 
 	// Get the turret current rot and target rot
 	float TurretRotChange = RelativeSpeed * TurretMaxRotSpeed * GetWorld()->DeltaTimeSeconds;
-	float RawNewWhirl = RelativeRotation.Yaw + TurretRotChange;
-	float FinalWhirl = FMath::Clamp(RawNewWhirl, -180.0f, 180.0f);
-
+	float FinalWhirl = RelativeRotation.Yaw + TurretRotChange;
+	//float FinalWhirl = FMath::Clamp(RawNewWhirl, -360)
 	SetRelativeRotation(FRotator(0.0f, FinalWhirl, 0.0f));
 }
 

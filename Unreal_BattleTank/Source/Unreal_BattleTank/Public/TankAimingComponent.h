@@ -40,7 +40,4 @@ private:
 
 	// Move the barrel to the aiming direction
 	void MovingBarrelTowardAiming(FVector AimingDirection);
-
-	// Move the turret to the aiming direction
-	void MovingTurretTowardAiming(FVector AimingDirection);
 };
