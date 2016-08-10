@@ -30,6 +30,10 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
+	// Player's tank Fire operation
+	UFUNCTION(BlueprintCallable, Category = Fire)
+	void Fire();
+
 private:
 
 	// The launch speed of tank projectile

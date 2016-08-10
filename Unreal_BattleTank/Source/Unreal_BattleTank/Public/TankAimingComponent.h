@@ -20,9 +20,6 @@ public:
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 	// Get the tank's aiming position
 	void AimLocation(FVector HitLocation, float LaunchSpeed);
