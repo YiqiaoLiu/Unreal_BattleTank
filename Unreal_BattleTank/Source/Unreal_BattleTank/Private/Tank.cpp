@@ -50,11 +50,12 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet) {
 
 // The fire operation of player tank
 void ATank::Fire() {
-	UE_LOG(LogTemp, Warning, TEXT("%s is firing"), *GetName());
+
 	if (!Barrel) return;
 	FVector ProjectileLoc = Barrel->GetSocketLocation(FName("Projectile"));
 	FRotator ProjectileRot = Barrel->GetSocketRotation(FName("Projectile"));
-	UE_LOG(LogTemp, Warning, TEXT("Projectile loc is: %s"), *ProjectileLoc.ToString());
-	GetWorld()->SpawnActor<AProjectile>(Projectile_BP, ProjectileLoc, ProjectileRot);
+
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, ProjectileLoc, ProjectileRot);
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 

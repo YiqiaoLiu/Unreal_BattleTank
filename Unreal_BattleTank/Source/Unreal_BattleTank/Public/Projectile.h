@@ -9,17 +9,24 @@ UCLASS()
 class UNREAL_BATTLETANK_API AProjectile : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
+
 	// Sets default values for this actor's properties
 	AProjectile();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick( float DeltaSeconds ) override;
 
+	// Called every frame
+	virtual void Tick(float DeltaSeconds) override;
+
+	// Launch the projectile
+	void LaunchProjectile(float LaunchSpeed);
+
+private:
 	
+	// The projectile movement component
+	UProjectileMovementComponent* ProjectileMovement = nullptr;
 	
 };
