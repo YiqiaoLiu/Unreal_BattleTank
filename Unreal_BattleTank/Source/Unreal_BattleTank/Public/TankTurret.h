@@ -8,7 +8,7 @@
 /**
  * 
  */
-UCLASS(meta = (BlueprintSpawnableComponent), hidecategories = ("Collision"))
+UCLASS(meta = (BlueprintSpawnableComponent))
 class UNREAL_BATTLETANK_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
@@ -21,6 +21,6 @@ private:
 
 	// The speed of turret rotate speed
 	UPROPERTY(EditAnywhere)
-	float TurretMaxRotSpeed = 10.0f;
+	float TurretMaxRotSpeed = 25.0f;
 	
 };

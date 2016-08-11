@@ -9,6 +9,7 @@
 // Forward declaration
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 class UTankAimingComponent;
 
 UCLASS()
@@ -39,6 +40,12 @@ private:
 	// The launch speed of tank projectile
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 10000.0f;
+
+	// Local barrel component to launch the projectile
+	UTankBarrel* Barrel = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> Projectile_BP;
 	
 	// Sets default values for this pawn's properties
 	ATank();

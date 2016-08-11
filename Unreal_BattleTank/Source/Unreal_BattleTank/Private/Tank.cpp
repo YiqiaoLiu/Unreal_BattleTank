@@ -3,6 +3,7 @@
 #include "Unreal_BattleTank.h"
 #include "TankAimingComponent.h"
 #include "Tank.h"
+#include "TankBarrel.h"
 
 
 // Sets default values
@@ -38,6 +39,7 @@ void ATank::AimLocation(FVector HitLocation) {
 // Get the Barrel mesh component by calling the aiming component
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 // Get the Turret mesh component by calling the aiming component
@@ -48,5 +50,9 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet) {
 // The fire operation of player tank
 void ATank::Fire() {
 	UE_LOG(LogTemp, Warning, TEXT("%s is firing"), *GetName());
+	/*if (!Barrel) return;
+	FVector ProjectileLoc = Barrel->GetSocketLocation(FName("Projectile"));
+	UE_LOG(LogTemp, Warning, TEXT("Projectile loc is: %s"), *ProjectileLoc.ToString());
+	*///AProjectile* NewProjectile = GetWorld()->SpawnActor(Projectile_BP, ProjectileLoc, FRotator::ZeroRotator);
 }
 
