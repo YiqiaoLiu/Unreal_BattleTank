@@ -51,11 +51,19 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet) {
 // The fire operation of player tank
 void ATank::Fire() {
 
+	// Check the fire time
+	bool IsFireReady = FPlatformTime::Seconds() - LastFireTime > FireRate;
+
+	// Get the projectile info
 	if (!Barrel) return;
 	FVector ProjectileLoc = Barrel->GetSocketLocation(FName("Projectile"));
 	FRotator ProjectileRot = Barrel->GetSocketRotation(FName("Projectile"));
 
-	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, ProjectileLoc, ProjectileRot);
-	Projectile->LaunchProjectile(LaunchSpeed);
+	// Judge whether launch the projectile based on the fire rate and set the last fire time
+	if (IsFireReady) {
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, ProjectileLoc, ProjectileRot);
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
 

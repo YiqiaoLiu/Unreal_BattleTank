@@ -20,6 +20,10 @@ class UNREAL_BATTLETANK_API ATank : public APawn
 public:
 	void AimLocation(FVector HitLocation);
 
+	// Player's tank Fire operation
+	UFUNCTION(BlueprintCallable, Category = Fire)
+	void Fire();
+
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
@@ -31,19 +35,22 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
-	// Player's tank Fire operation
-	UFUNCTION(BlueprintCallable, Category = Fire)
-	void Fire();
-
 private:
 
 	// The launch speed of tank projectile
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 10000.0f;
 
+	// The AI tank fire rate in seconds
+	float FireRate = 3;
+
+	// Store last fire time
+	double LastFireTime = 0;
+
 	// Local barrel component to launch the projectile
 	UTankBarrel* Barrel = nullptr;
 
+	// The projectile blueprint
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> Projectile_BP;
 	
