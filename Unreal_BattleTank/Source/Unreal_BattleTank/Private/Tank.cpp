@@ -2,6 +2,7 @@
 
 #include "Unreal_BattleTank.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 #include "Tank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
@@ -15,6 +16,9 @@ ATank::ATank()
 
 	// Create a sub-class of the tank aiming component
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("TankAimingComponent"));
+
+	// Create a sub-class of the tank movement component
+	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("TankMovementComponent"));
 }
 
 // Called when the game starts or when spawned

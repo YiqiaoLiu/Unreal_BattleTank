@@ -4,8 +4,8 @@
 #include "TankTrack.h"
 
 void UTankTrack::SetThrottle(float Throttle) {
-	UE_LOG(LogTemp, Warning, TEXT("Throttle called: %f"), Throttle);
 
+	// Apply a force in the track
 	FVector ForceApplied = GetForwardVector() * Throttle * MaxTrackForce;
 	FVector ForceLocation = GetComponentLocation();
 	UPrimitiveComponent* RootTank = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());

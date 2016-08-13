@@ -11,6 +11,7 @@ class UTankBarrel;
 class UTankTurret;
 class AProjectile;
 class UTankAimingComponent;
+class UTankMovementComponent;
 
 UCLASS()
 class UNREAL_BATTLETANK_API ATank : public APawn
@@ -25,7 +26,13 @@ public:
 	void Fire();
 
 protected:
+
+	// Store the tank aiming component
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	// Store the tank movement component
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 	// Set the barrel static mesh component
 	UFUNCTION(BlueprintCallable, Category = Setup)
