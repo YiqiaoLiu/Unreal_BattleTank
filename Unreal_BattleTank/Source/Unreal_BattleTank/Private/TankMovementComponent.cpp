@@ -10,10 +10,17 @@ void UTankMovementComponent::InitializeTrack(UTankTrack* LeftTrackToSet, UTankTr
 	RightTrack = RightTrackToSet;
 }
 
+// Make the tane move forward or backward
 void UTankMovementComponent::IntendMoveForward(float Dir) {
 	UE_LOG(LogTemp, Warning, TEXT("Move forward is called with dir %f"), Dir);
 	LeftTrack->SetThrottle(Dir);
 	RightTrack->SetThrottle(Dir);
 };
+
+// Make the tank turn left or right
+void UTankMovementComponent::IntendTurn(float Dir) {
+	LeftTrack->SetThrottle(Dir);
+	RightTrack->SetThrottle(-Dir);
+}
 
 

@@ -25,6 +25,10 @@ public:
 	// Make the tank move forward (dir = 1) or backward (dir = -1)
 	UFUNCTION(BlueprintCallable, Category = Movement)
 	void IntendMoveForward(float Dir);
+
+	// Make the tank turn right (dir = 1) or turn left (dir = -1)
+	UFUNCTION(BlueprintCallable, Category = Movement)
+	void IntendTurn(float Dir);
 	
 private:
 	UTankTrack* LeftTrack;
