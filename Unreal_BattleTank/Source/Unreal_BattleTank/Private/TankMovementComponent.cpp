@@ -4,15 +4,28 @@
 #include "TankTrack.h"
 #include "TankMovementComponent.h"
 
-// Intialize the track
+// Initialize the track
 void UTankMovementComponent::InitializeTrack(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet) {
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
+	UE_LOG(LogTemp, Warning, TEXT("%s Initialize!"), *GetOwner()->GetName());
+	if (LeftTrack) {
+		UE_LOG(LogTemp, Warning, TEXT("%s left track has left track"), *GetOwner()->GetName());
+	}
 }
 
-// Make the tane move forward or backward
+// Make the tank move forward or backward
 void UTankMovementComponent::IntendMoveForward(float Dir) {
-	UE_LOG(LogTemp, Warning, TEXT("Move forward is called with dir %f"), Dir);
+	//UE_LOG(LogTemp, Warning, TEXT("Move forward is called with dir %f"), Dir);
+	if (!LeftTrack || !RightTrack) {
+		if (!LeftTrack) {
+			UE_LOG(LogTemp, Warning, TEXT("%s left track ERROR"), *GetOwner()->GetName());
+		}
+		if (!RightTrack) {
+			UE_LOG(LogTemp, Warning, TEXT("%s right track ERROR"), *GetOwner()->GetName());
+		}
+		return;
+	}
 	LeftTrack->SetThrottle(Dir);
 	RightTrack->SetThrottle(Dir);
 };
@@ -21,6 +34,28 @@ void UTankMovementComponent::IntendMoveForward(float Dir) {
 void UTankMovementComponent::IntendTurn(float Dir) {
 	LeftTrack->SetThrottle(Dir);
 	RightTrack->SetThrottle(-Dir);
+}
+
+// Make the AI tank move
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) {
+
+	// Get the current AI tank forward vector
+	FVector CurrForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+
+	// Get the unit direction vector toward the target
+	FVector TargetDir = MoveVelocity.GetSafeNormal();
+
+	// Calculate the dot product and pass it into the IntendMoveForward function
+	// How fast will AI tank move forward/backward
+	float MoveDir = FVector::DotProduct(CurrForward, TargetDir);
+	IntendMoveForward(MoveDir);
+
+	// Calculate the cross product and pass it into the IntendTurn function
+	// How fast will AI tank turning
+	float TurnDir = FVector::CrossProduct(CurrForward, TargetDir).Z;
+	IntendTurn(TurnDir);
+	
+
 }
 
 

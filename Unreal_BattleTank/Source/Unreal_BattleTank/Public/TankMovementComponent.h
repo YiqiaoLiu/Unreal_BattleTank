@@ -29,8 +29,13 @@ public:
 	// Make the tank turn right (dir = 1) or turn left (dir = -1)
 	UFUNCTION(BlueprintCallable, Category = Movement)
 	void IntendTurn(float Dir);
+
+	// Make the AI tank moving
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 	
 private:
+
+	// Store the 2 tracks
 	UTankTrack* LeftTrack;
 	UTankTrack* RightTrack;
 
