@@ -28,6 +28,7 @@ public:
 protected:
 
 	// Store the tank aiming component
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	// Store the tank movement component

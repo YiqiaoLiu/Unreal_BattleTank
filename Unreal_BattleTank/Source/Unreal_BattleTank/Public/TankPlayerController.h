@@ -15,6 +15,12 @@ class UNREAL_BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+protected:
+
+	// Get the tank controller
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	ATank* GetControlledTank() const;
+
 private:
 
 	UPROPERTY(EditAnywhere)
@@ -28,8 +34,6 @@ private:
 	virtual void BeginPlay() override;
 	
 	virtual void Tick(float DeltaTime) override;
-
-	ATank* GetControlledTank() const;
 	
 	void AimTowardCrosshair();
 
