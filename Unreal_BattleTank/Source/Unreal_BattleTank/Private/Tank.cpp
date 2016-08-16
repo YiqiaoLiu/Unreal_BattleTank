@@ -25,6 +25,7 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
 
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 // Get the aiming location by calling aiming component
@@ -44,7 +45,7 @@ void ATank::Fire() {
 	bool IsFireReady = FPlatformTime::Seconds() - LastFireTime > FireRate;
 
 	// Get the projectile info
-	if (!Barrel) return;
+	if (!ensure(Barrel)) return;
 	FVector ProjectileLoc = Barrel->GetSocketLocation(FName("Projectile"));
 	FRotator ProjectileRot = Barrel->GetSocketRotation(FName("Projectile"));
 

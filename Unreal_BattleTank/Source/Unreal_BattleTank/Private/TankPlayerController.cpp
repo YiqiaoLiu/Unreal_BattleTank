@@ -14,9 +14,6 @@ void ATankPlayerController::BeginPlay() {
 	if (AimingComponent != nullptr) {
 		FindAimingComponent(AimingComponent);
 	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("Cannot find aiming component at begin play"));
-	}
 }
 
 // Called in every frame
