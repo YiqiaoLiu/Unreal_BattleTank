@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Unreal_BattleTank.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankAIController.h"
 
 void ATankAIController::BeginPlay() {
@@ -11,19 +11,20 @@ void ATankAIController::BeginPlay() {
 void ATankAIController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 
-	// Get the player tank and the AI tank itself
-	ATank* ControlledTank = Cast<ATank>(GetPawn());
-	ATank* PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto ControlledTank = GetPawn();
 
-	if (!ControlledTank) return;
+	if (!ensure(PlayerTank && ControlledTank)) { return; }
 	else {
 		// Moving the AI tank
 
-		MoveToActor(PlayerTank, AcceptanceDistance);
+		MoveToActor(GetWorld()->GetFirstPlayerController()->GetPawn(), AcceptanceDistance);
 
+		auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+		if (!ensure(AimingComponent)) return;
 		// Firing to the player tank
-		ControlledTank->AimLocation(PlayerTank->GetActorLocation());
-		ControlledTank->Fire();
+		AimingComponent->AimLocation(PlayerTank->GetActorLocation());
+		AimingComponent->Fire();
 	}
 
 }

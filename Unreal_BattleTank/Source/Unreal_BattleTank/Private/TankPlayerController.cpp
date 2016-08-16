@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Unreal_BattleTank.h"
-#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
@@ -10,32 +9,24 @@
 void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
 
-	UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (AimingComponent != nullptr) {
-		FindAimingComponent(AimingComponent);
-	}
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) return;
+	FindAimingComponent(AimingComponent);
 }
 
 // Called in every frame
 void ATankPlayerController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 
-	if (!GetControlledTank()) return;
+	if (!ensure(GetPawn())) return;
 	//UE_LOG(LogTemp, Warning, TEXT("Player Tank Tick function check"));
 
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) return;
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation)) {
-		GetControlledTank()->AimLocation(HitLocation);
+		AimingComponent->AimLocation(HitLocation);
 	}
-}
-
-// Get the pawn of the player tank
-ATank* ATankPlayerController::GetControlledTank() const {
-	return Cast<ATank>(GetPawn());
-}
-
-void ATankPlayerController::AimTowardCrosshair() {
-	if (!GetControlledTank()) return;
 }
 
 // Get the player tank aiming location

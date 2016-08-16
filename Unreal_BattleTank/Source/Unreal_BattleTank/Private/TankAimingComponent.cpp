@@ -3,6 +3,7 @@
 #include "Unreal_BattleTank.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 #include "TankAimingComponent.h"
 
 
@@ -29,10 +30,10 @@ void UTankAimingComponent::BeginPlay()
 
 
 // Get the aiming location
-void UTankAimingComponent::AimLocation(FVector HitLocation, float LaunchSpeed) {
+void UTankAimingComponent::AimLocation(FVector HitLocation) {
 
 	// If cannot find the barrel, return
-	if (!Barrel) return;
+	if (!ensure(Barrel)) return;
 
 	// Set the projectile launch
 	FVector StartLoc = Barrel->GetSocketLocation(FName("Projectile"));
@@ -82,6 +83,26 @@ void UTankAimingComponent::MovingBarrelTowardAiming(FVector AimingDirection) {
 	// Moving the barrel component
 	Barrel->Elevate(DeltaRot.Pitch);
 	Turret->Whirl(DeltaRot.Yaw);
+}
+
+// The fire operation of player tank
+void UTankAimingComponent::Fire() {
+
+	// Check the fire time
+	bool IsFireReady = FPlatformTime::Seconds() - LastFireTime > FireRate;
+
+	// Get the projectile info
+	if (!ensure(Barrel)) return;
+	FVector ProjectileLoc = Barrel->GetSocketLocation(FName("Projectile"));
+	FRotator ProjectileRot = Barrel->GetSocketRotation(FName("Projectile"));
+
+	// Judge whether launch the projectile based on the fire rate and set the last fire time
+	if (IsFireReady) {
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, ProjectileLoc, ProjectileRot);
+		if (!ensure(Projectile)) return;
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
 
 
