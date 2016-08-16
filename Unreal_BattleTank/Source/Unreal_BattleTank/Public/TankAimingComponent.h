@@ -27,9 +27,6 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
 	// Get the tank's aiming position
 	void AimLocation(FVector HitLocation);
 
@@ -64,10 +61,22 @@ private:
 	// Store last fire time
 	double LastFireTime = 0;
 
+	// Get the aiming direction
+	FVector AimDirection;
+
 	// The projectile blueprint
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> Projectile_BP;
 
+	// Call it when game begin play
+	virtual void BeginPlay() override;
+
+	// Call it every frame
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction) override;
+
 	// Move the barrel to the aiming direction
 	void MovingBarrelTowardAiming(FVector AimingDirection);
+
+	// Check whether the tank is aiming
+	bool IsTankAiming();
 };
