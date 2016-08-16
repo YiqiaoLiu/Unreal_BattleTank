@@ -62,18 +62,17 @@ void UTankAimingComponent::AimLocation(FVector HitLocation, float LaunchSpeed) {
 	}
 }
 
-// Set the barrel component of each tank
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet) {
+// Initialize the barrel and turret component
+void UTankAimingComponent::InitializeAimingComponent(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet) {
 	Barrel = BarrelToSet;
-}
-
-// Set the turret component of each tank
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) {
 	Turret = TurretToSet;
 }
 
 // Moving the barrel to the aiming direction
 void UTankAimingComponent::MovingBarrelTowardAiming(FVector AimingDirection) {
+
+	// Pointer protect
+	if (!Barrel || !Turret) return;
 
 	// Get the rotation of the barrel and the target
 	FRotator BarrelCurrentRot = Barrel->GetForwardVector().Rotation();
@@ -84,5 +83,6 @@ void UTankAimingComponent::MovingBarrelTowardAiming(FVector AimingDirection) {
 	Barrel->Elevate(DeltaRot.Pitch);
 	Turret->Whirl(DeltaRot.Yaw);
 }
+
 
 

@@ -2,6 +2,7 @@
 
 #include "Unreal_BattleTank.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
 
@@ -9,14 +10,12 @@
 void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
 
-	auto PossessedTank = GetControlledTank();
-	UE_LOG(LogTemp, Warning, TEXT("TankPlayerController work!"));
-
-	if (PossessedTank) {
-		UE_LOG(LogTemp, Warning, TEXT("The controller tank is: %s"), *PossessedTank->GetName());
+	UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (AimingComponent != nullptr) {
+		FindAimingComponent(AimingComponent);
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("The controller tank is MISSING"));
+		UE_LOG(LogTemp, Warning, TEXT("Cannot find aiming component at begin play"));
 	}
 }
 

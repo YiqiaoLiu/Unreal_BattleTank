@@ -16,7 +16,7 @@ class UNREAL_BATTLETANK_API UTankTrack : public UStaticMeshComponent
 public:
 
 	// Set the force to the tank track
-	UFUNCTION(BlueprintCallable, Category = Throttle)
+	UFUNCTION(BlueprintCallable, Category = "Throttle")
 	void SetThrottle(float Throttle);
 
 private:

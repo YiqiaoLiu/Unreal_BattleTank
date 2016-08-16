@@ -19,15 +19,15 @@ class UNREAL_BATTLETANK_API UTankMovementComponent : public UNavMovementComponen
 public:
 
 	// Initialize the track component
-	UFUNCTION(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void InitializeTrack(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 
 	// Make the tank move forward (dir = 1) or backward (dir = -1)
-	UFUNCTION(BlueprintCallable, Category = Movement)
+	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void IntendMoveForward(float Dir);
 
 	// Make the tank turn right (dir = 1) or turn left (dir = -1)
-	UFUNCTION(BlueprintCallable, Category = Movement)
+	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void IntendTurn(float Dir);
 
 	// Make the AI tank moving

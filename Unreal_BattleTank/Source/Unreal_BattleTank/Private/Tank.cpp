@@ -2,7 +2,6 @@
 
 #include "Unreal_BattleTank.h"
 #include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 #include "Tank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
@@ -13,17 +12,11 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
-	// Create a sub-class of the tank aiming component
-	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("TankAimingComponent"));
-
 }
 
-// Called when the game starts or when spawned
-void ATank::BeginPlay()
-{
+// Call it when game begin
+void ATank::BeginPlay() {
 	Super::BeginPlay();
-	
 }
 
 
@@ -36,19 +29,13 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 // Get the aiming location by calling aiming component
 void ATank::AimLocation(FVector HitLocation) {
+	if (!ensure(TankAimingComponent)) {
+		return;
+	}
 	TankAimingComponent->AimLocation(HitLocation, LaunchSpeed);
 }
 
-// Get the Barrel mesh component by calling the aiming component
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) {
-	TankAimingComponent->SetBarrelReference(BarrelToSet);
-	Barrel = BarrelToSet;
-}
 
-// Get the Turret mesh component by calling the aiming component
-void ATank::SetTurretReference(UTankTurret* TurretToSet) {
-	TankAimingComponent->SetTurretReference(TurretToSet);
-}
 
 // The fire operation of player tank
 void ATank::Fire() {

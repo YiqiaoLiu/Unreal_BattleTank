@@ -20,14 +20,14 @@ public:
 
 private:
 	// The elevation speed of barrel
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditAnywhere, Category = "Setup")
 	float MaxDegreePerSecond = 20.0f;
 
 	// The max degree that barrel could be elevated
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditAnywhere, Category = "Setup")
 	float MaxElevationDegree = 40.0f;
 
 	// The min degree that barrel could be elevated
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditAnywhere, Category = "Setup")
 	float MinElevationDegree = 0.0f;
 };

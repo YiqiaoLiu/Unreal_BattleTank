@@ -8,22 +8,12 @@
 void UTankMovementComponent::InitializeTrack(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet) {
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
-	UE_LOG(LogTemp, Warning, TEXT("%s Initialize!"), *GetOwner()->GetName());
-	if (LeftTrack) {
-		UE_LOG(LogTemp, Warning, TEXT("%s left track has left track"), *GetOwner()->GetName());
-	}
 }
 
 // Make the tank move forward or backward
 void UTankMovementComponent::IntendMoveForward(float Dir) {
 	//UE_LOG(LogTemp, Warning, TEXT("Move forward is called with dir %f"), Dir);
 	if (!LeftTrack || !RightTrack) {
-		if (!LeftTrack) {
-			UE_LOG(LogTemp, Warning, TEXT("%s left track ERROR"), *GetOwner()->GetName());
-		}
-		if (!RightTrack) {
-			UE_LOG(LogTemp, Warning, TEXT("%s right track ERROR"), *GetOwner()->GetName());
-		}
 		return;
 	}
 	LeftTrack->SetThrottle(Dir);
@@ -55,7 +45,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	float TurnDir = FVector::CrossProduct(CurrForward, TargetDir).Z;
 	IntendTurn(TurnDir);
 	
-
 }
+
 
 
