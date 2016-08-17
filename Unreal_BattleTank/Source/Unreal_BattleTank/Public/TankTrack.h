@@ -23,4 +23,10 @@ private:
 
 	// The max force of the tank
 	float MaxTrackForce = 10000000.0f;
+
+	// Constructor
+	UTankTrack();
+
+	// Call it every frame
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction) override;
 };
