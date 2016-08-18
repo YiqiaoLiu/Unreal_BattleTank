@@ -91,7 +91,12 @@ void UTankAimingComponent::MovingBarrelTowardAiming(FVector AimingDirection) {
 
 	// Moving the barrel component
 	Barrel->Elevate(DeltaRot.Pitch);
-	Turret->Whirl(DeltaRot.Yaw);
+	if (DeltaRot.Yaw < 180) {
+		Turret->Whirl(DeltaRot.Yaw);
+	}
+	else {
+		Turret->Whirl(-DeltaRot.Yaw);
+	}
 }
 
 // The fire operation of player tank

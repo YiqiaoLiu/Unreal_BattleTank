@@ -24,7 +24,9 @@ void ATankPlayerController::Tick(float DeltaTime) {
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) return;
 	FVector HitLocation;
-	if (GetSightRayHitLocation(HitLocation)) {
+
+	bool GetAiming = GetSightRayHitLocation(HitLocation);
+	if (GetAiming) {
 		AimingComponent->AimLocation(HitLocation);
 	}
 }
@@ -41,9 +43,9 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const {
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection)) {
 		// Do the raycast to define the fire location
-		GetLookVectorHitLocation(LookDirection, HitLocation);
+		return GetLookVectorHitLocation(LookDirection, HitLocation);
 	}
-	return true;
+	return false;
 }
 
 // Get the tank look direction
