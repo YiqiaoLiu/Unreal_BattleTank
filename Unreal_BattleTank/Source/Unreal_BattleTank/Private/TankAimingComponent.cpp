@@ -125,5 +125,10 @@ bool UTankAimingComponent::IsTankAiming() {
 	return !CurrDir.Equals(AimDirection, 0.05f);
 }
 
+// Get the firing status
+EFiringStatus UTankAimingComponent::GetFiringStatus() const {
+	return FiringStatus;
+}
+
 
 

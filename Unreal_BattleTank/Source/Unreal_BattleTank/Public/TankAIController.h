@@ -22,5 +22,5 @@ private:
 	virtual void Tick(float DeltaTime) override;
 	
 	// How close AI tank could move to player tank before firing
-	float AcceptanceDistance = 30;
+	float AcceptanceDistance = 7000;
 };

@@ -38,11 +38,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void InitializeAimingComponent(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
+	// Get the firing status
+	EFiringStatus GetFiringStatus() const;
+
 protected:
 
 	// Create and initialize the firing status
 	UPROPERTY(BlueprintReadOnly, Category = "Status")
-	EFiringStatus FiringStatus = EFiringStatus::Locking;
+	EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
 private:
 	
