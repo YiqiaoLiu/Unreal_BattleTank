@@ -10,7 +10,8 @@ UENUM()
 enum class EFiringStatus : uint8 {
 	Reloading,
 	Aiming,
-	Locking
+	Locking,
+	OutOfAmmo
 };
 
 // Forward declaration
@@ -40,6 +41,10 @@ public:
 
 	// Get the firing status
 	EFiringStatus GetFiringStatus() const;
+
+	// Get the remained ammo
+	UFUNCTION(BlueprintCallable, Category = "Fire")
+	int GetRoundsLeft() const;
 
 protected:
 
@@ -82,4 +87,7 @@ private:
 
 	// Check whether the tank is aiming
 	bool IsTankAiming();
+
+	// The remained ammo
+	int RoundsLeft = 3;
 };

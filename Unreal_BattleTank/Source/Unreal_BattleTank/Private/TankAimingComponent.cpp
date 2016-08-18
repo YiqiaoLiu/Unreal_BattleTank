@@ -30,7 +30,10 @@ void UTankAimingComponent::BeginPlay()
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction) {
 
 	// Checking the firing rate to determine whether the firing status is Reloading
-	if (FPlatformTime::Seconds() - LastFireTime < FireRate) {
+	if (RoundsLeft <= 0) {
+		FiringStatus = EFiringStatus::OutOfAmmo;
+	}
+	else if (FPlatformTime::Seconds() - LastFireTime < FireRate) {
 		FiringStatus = EFiringStatus::Reloading;
 	}
 	else if (IsTankAiming()) {
@@ -111,11 +114,12 @@ void UTankAimingComponent::Fire() {
 	FRotator ProjectileRot = Barrel->GetSocketRotation(FName("Projectile"));
 
 	// Judge whether launch the projectile based on the fire status and set the last fire time
-	if (FiringStatus != EFiringStatus::Reloading) {
+	if (FiringStatus == EFiringStatus::Locking || FiringStatus == EFiringStatus::Aiming) {
 		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, ProjectileLoc, ProjectileRot);
-		if (!ensure(Projectile)) return;
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+		RoundsLeft--;
+		UE_LOG(LogTemp, Warning, TEXT("Rounds left"));
 	}
 }
 
@@ -128,6 +132,11 @@ bool UTankAimingComponent::IsTankAiming() {
 // Get the firing status
 EFiringStatus UTankAimingComponent::GetFiringStatus() const {
 	return FiringStatus;
+}
+
+// Get the remained ammo
+int UTankAimingComponent::GetRoundsLeft() const {
+	return RoundsLeft;
 }
 
 
