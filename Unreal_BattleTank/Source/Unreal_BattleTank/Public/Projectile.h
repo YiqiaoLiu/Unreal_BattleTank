@@ -42,7 +42,13 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	URadialForceComponent* ExplosionForce = nullptr;
 
+	// The time the projectile will be destroy after hit something
+	float DestroyDelay = 2;
+
+	// Hit detection of the projectile
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 	
+	// The destroy function of the projectile
+	void DestroyTimeDelay();
 };
