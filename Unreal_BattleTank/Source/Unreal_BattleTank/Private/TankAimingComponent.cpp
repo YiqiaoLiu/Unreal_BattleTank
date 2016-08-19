@@ -135,7 +135,7 @@ EFiringStatus UTankAimingComponent::GetFiringStatus() const {
 }
 
 // Get the remained ammo
-int UTankAimingComponent::GetRoundsLeft() const {
+int32 UTankAimingComponent::GetRoundsLeft() const {
 	return RoundsLeft;
 }
 

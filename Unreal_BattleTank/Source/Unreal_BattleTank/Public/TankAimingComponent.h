@@ -44,7 +44,7 @@ public:
 
 	// Get the remained ammo
 	UFUNCTION(BlueprintCallable, Category = "Fire")
-	int GetRoundsLeft() const;
+	int32 GetRoundsLeft() const;
 
 protected:
 
@@ -61,9 +61,11 @@ private:
 	UTankTurret* Turret = nullptr;
 
 	// The launch speed
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 10000.0f;
 
 	// The AI tank fire rate in seconds
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float FireRate = 3;
 
 	// Store last fire time
@@ -73,7 +75,7 @@ private:
 	FVector AimDirection;
 
 	// The projectile blueprint
-	UPROPERTY(EditAnywhere, Category = "Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> Projectile_BP;
 
 	// Call it when game begin play
@@ -87,7 +89,7 @@ private:
 
 	// Check whether the tank is aiming
 	bool IsTankAiming();
-
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	// The remained ammo
-	int RoundsLeft = 3;
+	int32 RoundsLeft = 3;
 };

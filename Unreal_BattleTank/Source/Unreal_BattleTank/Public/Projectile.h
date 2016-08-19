@@ -28,5 +28,13 @@ private:
 	
 	// The projectile movement component
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
+
+	// The collison of the projectile
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* CollisionMesh = nullptr;
+
+	// The particle system of launch projectile
+	UPROPERTY(VisibleAnywhere)
+	UParticleSystemComponent* LaunchBlast = nullptr;
 	
 };
