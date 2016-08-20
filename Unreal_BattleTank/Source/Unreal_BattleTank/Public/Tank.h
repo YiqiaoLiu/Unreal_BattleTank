@@ -18,6 +18,10 @@ public:
 	// The damage function called by engine
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	// Calculate the percent of the HP
+	UFUNCTION(BlueprintPure, Category = "HP")
+	float PercentOfHP();
+
 private:
 	
 	// Tank total HP in game

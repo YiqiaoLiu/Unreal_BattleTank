@@ -21,4 +21,8 @@ float ATank::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AC
 	return Damage;
 }
 
+float ATank::PercentOfHP() {
+	return CurrentHP / TotalHP;
+}
+
 
