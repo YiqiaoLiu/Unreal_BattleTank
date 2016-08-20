@@ -45,6 +45,9 @@ private:
 	// The time the projectile will be destroy after hit something
 	float DestroyDelay = 2;
 
+	// The damage of each projectile
+	float ProjectileDamage = 20.0f;
+
 	// Hit detection of the projectile
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);

@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Unreal_BattleTank.h"
-//#include "TankAimingComponent.h"
 #include "Tank.h"
 
 // Sets default values
@@ -11,18 +10,15 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-// Call it when game begin
-void ATank::BeginPlay() {
-	Super::BeginPlay();
-}
+float ATank::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) {
 
+	//float DamageToApply = FMath::Clamp(Damage, 0.0f, CurrentHP);
+	CurrentHP -= Damage;
+	if (CurrentHP <= 0) {
+		UE_LOG(LogTemp, Warning, TEXT("TankDied"));
+	}
 
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
-{
-	Super::SetupPlayerInputComponent(InputComponent);
-
-	//TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
+	return Damage;
 }
 
 
