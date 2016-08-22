@@ -15,7 +15,7 @@ float ATank::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AC
 	//float DamageToApply = FMath::Clamp(Damage, 0.0f, CurrentHP);
 	CurrentHP -= Damage;
 	if (CurrentHP <= 0) {
-		UE_LOG(LogTemp, Warning, TEXT("TankDied"));
+		TankDeath.Broadcast();
 	}
 
 	return Damage;

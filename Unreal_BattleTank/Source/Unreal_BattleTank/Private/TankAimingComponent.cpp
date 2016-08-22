@@ -119,7 +119,6 @@ void UTankAimingComponent::Fire() {
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
 		RoundsLeft--;
-		UE_LOG(LogTemp, Warning, TEXT("Rounds left"));
 	}
 }
 

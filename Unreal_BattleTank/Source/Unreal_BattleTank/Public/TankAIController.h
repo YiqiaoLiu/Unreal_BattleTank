@@ -20,6 +20,12 @@ private:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
+
+	virtual void SetPawn(APawn* InPawn) override;
+
+	// Receive the death event from Tank
+	UFUNCTION()
+	void AITankDeathEvent();
 	
 	// How close AI tank could move to player tank before firing
 	float AcceptanceDistance = 7000;

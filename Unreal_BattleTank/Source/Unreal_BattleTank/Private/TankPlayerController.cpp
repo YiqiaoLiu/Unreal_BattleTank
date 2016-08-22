@@ -2,6 +2,7 @@
 
 #include "Unreal_BattleTank.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 #include "TankPlayerController.h"
 
 
@@ -12,6 +13,20 @@ void ATankPlayerController::BeginPlay() {
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) return;
 	FindAimingComponent(AimingComponent);
+}
+
+// Set the pawn of the player tank
+void ATankPlayerController::SetPawn(APawn* InPawn) {
+
+	Super::SetPawn(InPawn);
+	// Pointer protect
+	if (!InPawn) return;
+
+	ATank* PossessedTank = Cast<ATank>(InPawn);
+	// Pointer protect
+	if (!ensure(PossessedTank)) return;
+
+	PossessedTank->TankDeath.AddUniqueDynamic(this, &ATankPlayerController::PlayerTankDeathEvent);
 }
 
 // Called in every frame
@@ -74,6 +89,11 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		HitLocation = FVector(0.0f);
 		return false;
 	}
+}
+
+// Receive the death event
+void ATankPlayerController::PlayerTankDeathEvent() {
+	UE_LOG(LogTemp, Warning, TEXT("Player tank death receive"));
 }
 
 

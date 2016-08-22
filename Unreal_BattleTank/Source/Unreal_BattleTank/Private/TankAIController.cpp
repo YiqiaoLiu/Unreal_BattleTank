@@ -2,10 +2,24 @@
 
 #include "Unreal_BattleTank.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 #include "TankAIController.h"
 
 void ATankAIController::BeginPlay() {
 	Super::BeginPlay();
+}
+
+void ATankAIController::SetPawn(APawn* InPawn) {
+	Super::SetPawn(InPawn);
+
+	// Pointer protect
+	if (!InPawn) return;
+
+	ATank* PossessedTank = Cast<ATank>(InPawn);
+	if (!ensure(PossessedTank)) return;
+
+	PossessedTank->TankDeath.AddUniqueDynamic(this, &ATankAIController::AITankDeathEvent);
+
 }
 
 void ATankAIController::Tick(float DeltaTime) {
@@ -30,6 +44,10 @@ void ATankAIController::Tick(float DeltaTime) {
 		}
 	}
 
+}
+
+void ATankAIController::AITankDeathEvent() {
+	UE_LOG(LogTemp, Warning, TEXT("Receive death event"));
 }
 
 
