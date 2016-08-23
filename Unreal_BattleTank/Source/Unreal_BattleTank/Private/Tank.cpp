@@ -10,6 +10,12 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+void ATank::BeginPlay() {
+
+	Super::BeginPlay();
+	CurrentHP = TotalHP;
+}
+
 float ATank::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) {
 
 	//float DamageToApply = FMath::Clamp(Damage, 0.0f, CurrentHP);

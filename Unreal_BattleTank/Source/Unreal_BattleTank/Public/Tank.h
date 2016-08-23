@@ -34,9 +34,12 @@ private:
 
 	// Current HP in the game
 	UPROPERTY(VisibleAnywhere, Category = "HP")
-	float CurrentHP = TotalHP;
+	float CurrentHP;
 
 	// Sets default values for this pawn's properties
 	ATank();
+
+	// Call it when game begin
+	virtual void BeginPlay() override;
 	
 };
