@@ -47,7 +47,11 @@ void ATankAIController::Tick(float DeltaTime) {
 }
 
 void ATankAIController::AITankDeathEvent() {
-	UE_LOG(LogTemp, Warning, TEXT("Receive death event"));
+	
+	// Pointer protect
+	if (!ensure(GetPawn())) return;
+
+	GetPawn()->DetachFromControllerPendingDestroy();
 }
 
 
